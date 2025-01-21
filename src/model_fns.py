@@ -3,28 +3,15 @@ from OCC.Core.STEPControl import (
     STEPControl_Writer,
     STEPControl_AsIs,
 )
-from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_MakeVertex
-from OCC.Core.TopoDS import TopoDS_Compound
-from OCC.Core.BRep import BRep_Builder, BRep_Tool
-from OCC.Core.TopoDS import TopoDS_Shape
-from OCC.Core.TopExp import TopExp_Explorer
-from OCC.Core.TopAbs import TopAbs_FACE
-from OCC.Core.gp import gp_Pnt, gp_Dir, gp_Pln
-from OCC.Core.Geom import Geom_Plane
-from OCC.Core.GeomAPI import GeomAPI_IntCS
-from OCC.Core.STEPControl import (
-    STEPControl_Reader,
-    STEPControl_Writer,
-    STEPControl_AsIs,
-)
-from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_MakeVertex
+from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeFace
 from OCC.Core.TopoDS import TopoDS_Compound, TopoDS_Shape
 from OCC.Core.BRep import BRep_Builder, BRep_Tool
 from OCC.Core.TopExp import TopExp_Explorer
-from OCC.Core.TopAbs import TopAbs_FACE
+from OCC.Core.TopAbs import TopAbs_VERTEX
 from OCC.Core.gp import gp_Pnt, gp_Dir, gp_Pln
-from OCC.Core.Geom import Geom_Plane
-from OCC.Core.GeomAPI import GeomAPI_IntCS
+from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Section
+import math
+from typing import List, Tuple
 
 
 def read_file(file: str) -> tuple[int, str]:
@@ -71,22 +58,6 @@ def read_file(file: str) -> tuple[int, str]:
             return (3, READ_FILE_RESULTS[3])
         case _:
             return (-1, READ_FILE_RESULTS[-1])
-
-
-from OCC.Core.STEPControl import (
-    STEPControl_Reader,
-    STEPControl_Writer,
-    STEPControl_AsIs,
-)
-from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeFace
-from OCC.Core.TopoDS import TopoDS_Compound, TopoDS_Shape
-from OCC.Core.BRep import BRep_Builder, BRep_Tool
-from OCC.Core.TopExp import TopExp_Explorer
-from OCC.Core.TopAbs import TopAbs_VERTEX
-from OCC.Core.gp import gp_Pnt, gp_Dir, gp_Pln
-from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Section
-import math
-from typing import List, Tuple
 
 
 def read_plane(
