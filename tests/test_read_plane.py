@@ -1,7 +1,7 @@
 import os
 import pytest
 from OCC.Core.STEPControl import STEPControl_Reader
-from src.model_fns import read_plane
+from src import read_plane
 
 
 @pytest.fixture

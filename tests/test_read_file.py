@@ -1,4 +1,4 @@
-from src.model_fns import read_file
+from src import read_file
 
 
 def test_file_read_success():

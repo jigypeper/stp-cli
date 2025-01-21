@@ -1,7 +1,7 @@
 import typer
 from typing_extensions import Annotated
 from typing import Optional, Tuple
-from model_fns import read_file, read_plane
+from src import read_file, read_plane
 from OCC.Core.STEPControl import STEPControl_Reader
 
 
