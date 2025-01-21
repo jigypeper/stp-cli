@@ -9,7 +9,10 @@ def main(
     in_step: Annotated[str, typer.Option(help="Path to the step file")],
     in_plane: Annotated[
         tuple[float, float, float, float, float, float],
-        typer.Option(help="Coordinates and normal vector for plane (x,y,z,nx,ny,nz)"),
+        typer.Option(
+            help="Coordinates and normal vector for plane (x,y,z,nx,ny,nz). "
+            "Note: must be entered as 6 space seperated numbers"
+        ),
     ],
     output_file: Annotated[
         str, typer.Option(help="Path to output STEP file")

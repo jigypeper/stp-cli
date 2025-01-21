@@ -14,7 +14,7 @@ import math
 from typing import List, Tuple
 
 
-def read_file(file: str) -> tuple[int, str]:
+def read_file(file: str) -> Tuple[int, str]:
     """
     Reads a STEP file and returns the status of the operation along with a descriptive message.
 
