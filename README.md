@@ -11,5 +11,8 @@ brew install miniforge
 ```
 2. Create a conda environment for python 3.11
 ```bash
-conda create --name=pyoccenv python=3.11
+conda env create --file environment.yml
 ```
+Note: you may need to deactivate and the environment and reactivate it (including the base environment) `conda deactivate` followed by `conda activate pyoccenv`.
+
+In an ideal world I would use Astrals `uv` for both package management and environment management, but pythonocc-core is not available on the PyPi repository. Hence why we are using conda.
