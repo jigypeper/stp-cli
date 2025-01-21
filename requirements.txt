@@ -1,0 +1,5 @@
+pytest
+pytest-cov
+typer
+pythonocc-core=7.8.1.1
+pyqt
