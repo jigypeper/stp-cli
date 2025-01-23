@@ -67,7 +67,7 @@ In an ideal world, we would use Astral's `uv` for both package and environment m
 ## Project Structure
 
 ```
-icomat_cli/
+stp_cli/
 ├── README.md               # Documentation
 ├── environment.yml         # Conda environment file
 ├── main.py                 # Main entry point
