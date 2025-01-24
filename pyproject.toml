@@ -1,0 +1,13 @@
+[project]
+name = "stp-cli"
+version = "0.1.0"
+description = "CLI to process stp files"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "cadquery==2.5.2",
+    "pyqt5==5.15.9",
+    "pytest==8.3.4",
+    "pytest-cov==6.0.0",
+    "typer==0.15.1",
+]
