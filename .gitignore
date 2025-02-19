@@ -1,7 +1,12 @@
 /tests/__pycache__
+/tests/integration/__pycache__
+/tests/unit/__pycache__
 /.pytest_cache/
 /src/.my_py_cache/
 /src/.pytest_cache/
 /src/__pycache__/
+/src/domain/__pycache__/
+/src/fileio/__pycache__/
+/src/geometry/__pycache__/
 /__pycache__/
 /.venv
