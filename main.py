@@ -22,7 +22,6 @@ def main(
         # Create domain objects
         px, py, pz, nx, ny, nz = in_plane
         plane = Plane(point=Point3D(px, py, pz), normal=Vector3D(nx, ny, nz))
-        plane.validate()
 
         # Read model
         model = STEPReader.read_model(in_step)
