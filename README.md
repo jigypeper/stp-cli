@@ -60,14 +60,31 @@ stp_cli/
 ├── README.md               # Documentation
 ├── requirements.txt        # Project dependencies
 ├── main.py                 # Main entry point
-├── intersection.stp        # Example output STEP file
 ├── src/                    # Source code
-│   ├── __init__.py         # Package initialization
-│   └── model_fns.py        # STEP file processing functions
-└── tests/                  # Unit tests
+│   ├── __init__.py         
+│   ├── exceptions.py       # custom exceptions
+│   ├── domain/             # data structures
+│   │   ├── __init__.py
+│   │   └── model.py
+│   ├── fileio/             # io functions
+│   │   ├── __init__.py
+│   │   ├── reader.py
+│   │   └── writer.py
+│   └── geometry/           # 3D processing
+│       ├── __init__.py
+│       └── engine.py
+│
+└── tests/                  # Tests
     ├── __init__.py
-    ├── test_read_file.py
-    └── test_read_plane.py
+    ├── conftest.py         # Fixtures
+    ├── unit/               # Unit tests
+    │   ├── __init__.py
+    │   ├── test_fileio.py
+    │   ├── test_model.py
+    │   └── test_plane.py
+    └── integration/        # Integration tests
+        ├── __init__.py
+        └── test_workflow.py
 ```
 
 ---

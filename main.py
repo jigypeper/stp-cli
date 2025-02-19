@@ -1,54 +1,45 @@
 import typer
 from typing_extensions import Annotated
-import cadquery as cq
-from src import read_file, read_plane
+from src.fileio.reader import STEPReader
+from src.geometry.engine import GeometryEngine
+from src.fileio.writer import STEPWriter
+from src.domain.model import Point3D, Vector3D, Plane
+from src.exceptions import STPCliError
 
 
 def main(
     in_step: Annotated[str, typer.Option(help="Path to the step file")],
     in_plane: Annotated[
         tuple[float, float, float, float, float, float],
-        typer.Option(
-            help="Coordinates and normal vector for plane (x,y,z,nx,ny,nz). "
-            "Note: must be entered as 6 space seperated numbers"
-        ),
+        typer.Option(help="Coordinates and normal vector for plane (x,y,z,nx,ny,nz)"),
     ],
     output_file: Annotated[
         str, typer.Option(help="Path to output STEP file")
     ] = "intersection.stp",
 ):
-    """
-    CLI tool to find intersections between a STEP model and a plane.
-
-    Args:
-        in_step: Path to input STEP file
-        in_plane: Tuple of plane coordinates (x,y,z) and normal vector (nx,ny,nz)
-        output_file: Path to output STEP file for intersections
-    """
-    # Read the STEP file
-    status, message = read_file(in_step)
-    typer.echo(f"STEP file read status: {message}")
-    if status != 1:
-        raise typer.Exit(code=1)
-
-    # Load the model
-    model = cq.importers.importStep(in_step)
-
-    typer.echo("Checking for intersections...")
+    """CLI tool to find intersections between a STEP model and a plane."""
     try:
-        success, points = read_plane(model, in_plane, output_file)
+        # Create domain objects
+        px, py, pz, nx, ny, nz = in_plane
+        plane = Plane(point=Point3D(px, py, pz), normal=Vector3D(nx, ny, nz))
 
-        if success:
+        # Read model
+        model = STEPReader.read_model(in_step)
+
+        # Find intersections
+        engine = GeometryEngine(model)
+        result = engine.find_intersections(plane)
+
+        if result.success:
+            # Write results
+            STEPWriter.write_intersection_points(result.points, output_file)
             typer.echo(f"Intersections found and written to {output_file}")
-            typer.echo("Intersection points:")
-            for i, point in enumerate(points, 1):
-                typer.echo(
-                    f"  Point {i}: ({point[0]:.3f}, {point[1]:.3f}, {point[2]:.3f})"
-                )
+            for i, point in enumerate(result.points, 1):
+                typer.echo(f"Point {i}: ({point.x:.3f}, {point.y:.3f}, {point.z:.3f})")
         else:
-            typer.echo("No intersections found. No output STEP file created.")
+            typer.echo("No intersections found")
 
-    except ValueError as e:
+    except STPCliError as e:
         typer.echo(f"Error: {str(e)}", err=True)
         raise typer.Exit(code=1)
     except Exception as e:
