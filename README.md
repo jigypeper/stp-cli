@@ -16,9 +16,10 @@ This project is a Python-based tool for working with 3D geometry in STEP files u
 ### Prerequisites
 Ensure [Homebrew](https://brew.sh/) is installed.
 
-1. Install Python:
+1. Install Python, and OpenCascade:
    ```bash
    brew install python
+   brew install opencascade
    ```
 
 2. Install `uv` package manager:
